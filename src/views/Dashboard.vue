@@ -104,7 +104,17 @@
                     <div class="w-1/5 text-center hidden md:inline-block">date</div>
                     <div class="inline-block w-full md:w-1/5 text-center">sender</div>
                     <div class="inline-block w-full md:w-1/5 text-center">receiver</div>
-                    <div class="w-1/6 text-right hidden md:inline-block">action</div>
+                    <div class="w-1/6 text-right hidden md:inline-block">
+                            <a href="./don't-have-message.html" class="inline-block align-middle text-red-600 transform active:scale-95 duration-100">
+                                delete all
+                                <svg xmlns="http://www.w3.org/2000/svg" class="float-right mt-1 ml-1" width="12" height="14" viewBox="0 0 12 14" fill="none">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M4.875 1.375C4.56434 1.375 4.3125 1.62684 4.3125 1.9375H7.6875C7.6875 1.62684 7.43566 1.375 7.125 1.375H4.875ZM8.8125 1.9375C8.8125 1.00552 8.05698 0.25 7.125 0.25H4.875C3.94302 0.25 3.1875 1.00552 3.1875 1.9375H0.9375C0.62684 1.9375 0.375 2.18934 0.375 2.5C0.375 2.81066 0.62684 3.0625 0.9375 3.0625H11.0625C11.3732 3.0625 11.625 2.81066 11.625 2.5C11.625 2.18934 11.3732 1.9375 11.0625 1.9375H8.8125Z" fill="currentColor"/>
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M4.55777 5.87615C4.86779 5.85628 5.13522 6.09149 5.1551 6.40151L5.43635 10.789C5.45622 11.099 5.22101 11.3665 4.91098 11.3863C4.60096 11.4062 4.33353 11.171 4.31365 10.861L4.0324 6.47348C4.01253 6.16346 4.24774 5.89602 4.55777 5.87615Z" fill="currentColor"/>
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M7.44223 5.87615C7.13221 5.85628 6.86477 6.09149 6.8449 6.40151L6.56365 10.789C6.54378 11.099 6.77899 11.3665 7.08902 11.3863C7.39904 11.4062 7.66647 11.171 7.68635 10.861L7.9676 6.47348C7.98747 6.16346 7.75226 5.89602 7.44223 5.87615Z" fill="currentColor"/>
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M0.981361 4.5734C0.918411 4.06981 1.31108 3.625 1.81859 3.625H10.1814C10.6889 3.625 11.0816 4.06981 11.0186 4.5734L10.0563 12.2718C9.95078 13.1163 9.23291 13.75 8.38187 13.75H3.61813C2.76708 13.75 2.04922 13.1163 1.94366 12.2718L0.981361 4.5734ZM2.13719 4.75L3.05997 12.1323C3.09516 12.4138 3.33445 12.625 3.61813 12.625H8.38187C8.66555 12.625 8.90484 12.4138 8.94003 12.1323L9.86281 4.75H2.13719Z" fill="currentColor"/>
+                                </svg>
+                            </a>
+                        </div>
                 </div>
             </div>
 
@@ -127,35 +137,11 @@
                                         }}</div>
                         <div class="inline-block w-full md:w-1/5 text-center">{{message.sender}}</div>
                         <div class="inline-block w-full md:w-1/5 text-center">{{accountId}}</div>
-                        <div class="w-1/6 text-right hidden md:inline-block">
-                            <a href="./don't-have-message.html" class="inline-block align-middle text-red-600 transform active:scale-95 duration-100">
-                                delete  
-                                <svg xmlns="http://www.w3.org/2000/svg" class="float-right mt-1 ml-1" width="12" height="14" viewBox="0 0 12 14" fill="none">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M4.875 1.375C4.56434 1.375 4.3125 1.62684 4.3125 1.9375H7.6875C7.6875 1.62684 7.43566 1.375 7.125 1.375H4.875ZM8.8125 1.9375C8.8125 1.00552 8.05698 0.25 7.125 0.25H4.875C3.94302 0.25 3.1875 1.00552 3.1875 1.9375H0.9375C0.62684 1.9375 0.375 2.18934 0.375 2.5C0.375 2.81066 0.62684 3.0625 0.9375 3.0625H11.0625C11.3732 3.0625 11.625 2.81066 11.625 2.5C11.625 2.18934 11.3732 1.9375 11.0625 1.9375H8.8125Z" fill="currentColor"/>
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M4.55777 5.87615C4.86779 5.85628 5.13522 6.09149 5.1551 6.40151L5.43635 10.789C5.45622 11.099 5.22101 11.3665 4.91098 11.3863C4.60096 11.4062 4.33353 11.171 4.31365 10.861L4.0324 6.47348C4.01253 6.16346 4.24774 5.89602 4.55777 5.87615Z" fill="currentColor"/>
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M7.44223 5.87615C7.13221 5.85628 6.86477 6.09149 6.8449 6.40151L6.56365 10.789C6.54378 11.099 6.77899 11.3665 7.08902 11.3863C7.39904 11.4062 7.66647 11.171 7.68635 10.861L7.9676 6.47348C7.98747 6.16346 7.75226 5.89602 7.44223 5.87615Z" fill="currentColor"/>
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M0.981361 4.5734C0.918411 4.06981 1.31108 3.625 1.81859 3.625H10.1814C10.6889 3.625 11.0816 4.06981 11.0186 4.5734L10.0563 12.2718C9.95078 13.1163 9.23291 13.75 8.38187 13.75H3.61813C2.76708 13.75 2.04922 13.1163 1.94366 12.2718L0.981361 4.5734ZM2.13719 4.75L3.05997 12.1323C3.09516 12.4138 3.33445 12.625 3.61813 12.625H8.38187C8.66555 12.625 8.90484 12.4138 8.94003 12.1323L9.86281 4.75H2.13719Z" fill="currentColor"/>
-                                </svg>
-                            </a>
-                        </div>
                     </div>
 
                     <p class="text-sm w-full md:w-4/5 mt-5">
                         {{message.message}}
                     </p>
-                    
-                    <div class="md:hidden flex justify-between text-sm font-bold mt-14">
-                        <p class="">11:44 13 October 2021</p>
-                        <a href="#" class="inline-block align-middle text-red-600 transform active:scale-95 duration-100">
-                            delete  
-                            <svg xmlns="http://www.w3.org/2000/svg" class="float-right mt-1 ml-1" width="12" height="14" viewBox="0 0 12 14" fill="none">
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M4.875 1.375C4.56434 1.375 4.3125 1.62684 4.3125 1.9375H7.6875C7.6875 1.62684 7.43566 1.375 7.125 1.375H4.875ZM8.8125 1.9375C8.8125 1.00552 8.05698 0.25 7.125 0.25H4.875C3.94302 0.25 3.1875 1.00552 3.1875 1.9375H0.9375C0.62684 1.9375 0.375 2.18934 0.375 2.5C0.375 2.81066 0.62684 3.0625 0.9375 3.0625H11.0625C11.3732 3.0625 11.625 2.81066 11.625 2.5C11.625 2.18934 11.3732 1.9375 11.0625 1.9375H8.8125Z" fill="currentColor"/>
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M4.55777 5.87615C4.86779 5.85628 5.13522 6.09149 5.1551 6.40151L5.43635 10.789C5.45622 11.099 5.22101 11.3665 4.91098 11.3863C4.60096 11.4062 4.33353 11.171 4.31365 10.861L4.0324 6.47348C4.01253 6.16346 4.24774 5.89602 4.55777 5.87615Z" fill="currentColor"/>
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M7.44223 5.87615C7.13221 5.85628 6.86477 6.09149 6.8449 6.40151L6.56365 10.789C6.54378 11.099 6.77899 11.3665 7.08902 11.3863C7.39904 11.4062 7.66647 11.171 7.68635 10.861L7.9676 6.47348C7.98747 6.16346 7.75226 5.89602 7.44223 5.87615Z" fill="currentColor"/>
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M0.981361 4.5734C0.918411 4.06981 1.31108 3.625 1.81859 3.625H10.1814C10.6889 3.625 11.0816 4.06981 11.0186 4.5734L10.0563 12.2718C9.95078 13.1163 9.23291 13.75 8.38187 13.75H3.61813C2.76708 13.75 2.04922 13.1163 1.94366 12.2718L0.981361 4.5734ZM2.13719 4.75L3.05997 12.1323C3.09516 12.4138 3.33445 12.625 3.61813 12.625H8.38187C8.66555 12.625 8.90484 12.4138 8.94003 12.1323L9.86281 4.75H2.13719Z" fill="currentColor"/>
-                            </svg>
-                        </a>
-                    </div>
                 </div>
             </section>
         </div>
