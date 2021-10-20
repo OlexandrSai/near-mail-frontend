@@ -1,5 +1,4 @@
-import { keyStores, Near, WalletConnection } from "near-api-js";
-//import { keyStores, Near, WalletConnection, utils } from "near-api-js";
+import { keyStores, Near, WalletConnection } from "near-api-js"; //utils
 //import BN from "bn.js";
 
 export const CONTRACT_ID = "dev-1634694940112-40194560672775";
@@ -23,15 +22,15 @@ export const near = new Near({
 //     return  wallet.account().viewFunction(CONTRACT_ID,"viewMyDesign", {accountId:accountId})
 //   }
 
-//   //function to generate new design
-//   export const generateDesign = (accountId) => {
-//     return wallet.account().functionCall({
-//       contractId: CONTRACT_ID,
-//       methodName: "design",
-//       gas,
-//       args: {accountId: accountId}
-//   })
-//   };
+  //function to get all  income messages
+  export const getMessages = (accountId) => {
+    return wallet.account().viewFunction(CONTRACT_ID,"retrieveMessages", {accountId:accountId})
+  //   return wallet.account().functionCall({
+  //     contractId: CONTRACT_ID,
+  //     methodName: "retrieveMessages",
+  //     gas
+  // })
+  };
 
 //   //function to claim existing design
 //   export const claimDesign = (seed) => {
