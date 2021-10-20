@@ -1,62 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
 @tailwind base;
 @tailwind components;
-
-.btn {
-    @apply py-3 px-6 bg-gradient-to-r from-indigo-700 to-blue-600 text-white font-medium btn-shadow transition duration-75 transform;
-}
-.btn:hover {
-    @apply from-indigo-600 to-blue-500;
-}
-.btn:active {
-    @apply from-indigo-700 to-blue-500 scale-95;
-}
-.btn-shadow {
-    box-shadow: none;
-}
-.btn-shadow:hover {
-    box-shadow: 0px 2px 30px rgba(59, 130, 246, 0.5);
-}
-.btn-shadow:active {
-    box-shadow: none;
-}
-
-.input {
-    @apply border border-gray-900 pl-6 py-2 bg-indigo-50 outline-none;
-}
-.input:focus {
-    @apply  rounded-none border-2 border-blue-600 box-border;
-}
-.bg-gradient {
-    background: url('/src/assets/bg-gradient.png') no-repeat; 
-    background-size: cover; 
-    background-position: -300px 0;
-}
-
-@screen sm {
-    .bg-gradient {
-        /* background: url('../img/bg-gradient.png') no-repeat;  */
-        background: red;
-        background-size: cover; 
-        background-position: -500px 0;
-    }
-    
-}
-@screen lg {
-    .bg-gradient {
-        background: url('/src/assets/bg-gradient.png') no-repeat; 
-        background-size: cover; 
-        background-position: 0 -500px;
-    }
-    
-}
-.btn-home {
-    @apply px-6 py-2 text-white border border-white transition duration-200 font-medium;
-}
-.btn-home:hover {
-    @apply text-blue-800 bg-white;
-}
-.btn-home:active{
-    @apply bg-gray-200;
-}
-
 @tailwind utilities;
+
+@layer base {
+    body {
+        font-family: 'Inter', sans-serif;
+    }
+    .profile-info {
+        width: 114px;
+    }
+    .messaging-btn {
+        width: 100%;
+    }
+    .bg-50 {
+        background-color: rgba(0, 0, 0, 0.8);
+    }
+    .alert-bg {
+        width: 312px;
+    }
+    @screen md {
+        .messaging-btn {
+            width: 272px;
+        }
+        .alert-bg {
+            width: 498px;
+        }
+    }
+    @screen lg {
+
+    }
+    @screen xl {
+        .profile-info {
+            width: 334px;
+        }
+    }
+    @screen 2xl {
+
+    }
+}
