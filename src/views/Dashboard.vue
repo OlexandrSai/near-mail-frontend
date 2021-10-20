@@ -93,9 +93,9 @@
                     <!-- <input type="text" placeholder="Search or type mail" class="relative search md:mr-24 py-3 outline-none border focus:border-blue-400 w-full rounded-full pl-8"> -->
                     
                     <!-- Start messaginig -->
-                    <a href="./send-message.html" class="mt-6 md:mt-0 messaging-btn py-4 bg-gradient-to-r from-black to-black hover:from-blue-400 hover:to-blue-300 font-bold text-sm text-white text-center rounded-full transform active:scale-95 duration-150">
+                    <button @click="modalOpen=true" class="mt-6 md:mt-0 messaging-btn py-4 bg-gradient-to-r from-black to-black hover:from-blue-400 hover:to-blue-300 font-bold text-sm text-white text-center rounded-full transform active:scale-95 duration-150">
                         START MESSAGING
-                    </a>
+                    </button>
 
                 </form>
 
@@ -105,7 +105,7 @@
                     <div class="inline-block w-full md:w-1/5 text-center">sender</div>
                     <div class="inline-block w-full md:w-1/5 text-center">receiver</div>
                     <div class="w-1/6 text-right hidden md:inline-block">
-                            <a href="./don't-have-message.html" class="inline-block align-middle text-red-600 transform active:scale-95 duration-100">
+                            <button @click="deleteAllMessages" class="inline-block align-middle text-red-600 transform active:scale-95 duration-100">
                                 delete all
                                 <svg xmlns="http://www.w3.org/2000/svg" class="float-right mt-1 ml-1" width="12" height="14" viewBox="0 0 12 14" fill="none">
                                     <path fill-rule="evenodd" clip-rule="evenodd" d="M4.875 1.375C4.56434 1.375 4.3125 1.62684 4.3125 1.9375H7.6875C7.6875 1.62684 7.43566 1.375 7.125 1.375H4.875ZM8.8125 1.9375C8.8125 1.00552 8.05698 0.25 7.125 0.25H4.875C3.94302 0.25 3.1875 1.00552 3.1875 1.9375H0.9375C0.62684 1.9375 0.375 2.18934 0.375 2.5C0.375 2.81066 0.62684 3.0625 0.9375 3.0625H11.0625C11.3732 3.0625 11.625 2.81066 11.625 2.5C11.625 2.18934 11.3732 1.9375 11.0625 1.9375H8.8125Z" fill="currentColor"/>
@@ -113,13 +113,13 @@
                                     <path fill-rule="evenodd" clip-rule="evenodd" d="M7.44223 5.87615C7.13221 5.85628 6.86477 6.09149 6.8449 6.40151L6.56365 10.789C6.54378 11.099 6.77899 11.3665 7.08902 11.3863C7.39904 11.4062 7.66647 11.171 7.68635 10.861L7.9676 6.47348C7.98747 6.16346 7.75226 5.89602 7.44223 5.87615Z" fill="currentColor"/>
                                     <path fill-rule="evenodd" clip-rule="evenodd" d="M0.981361 4.5734C0.918411 4.06981 1.31108 3.625 1.81859 3.625H10.1814C10.6889 3.625 11.0816 4.06981 11.0186 4.5734L10.0563 12.2718C9.95078 13.1163 9.23291 13.75 8.38187 13.75H3.61813C2.76708 13.75 2.04922 13.1163 1.94366 12.2718L0.981361 4.5734ZM2.13719 4.75L3.05997 12.1323C3.09516 12.4138 3.33445 12.625 3.61813 12.625H8.38187C8.66555 12.625 8.90484 12.4138 8.94003 12.1323L9.86281 4.75H2.13719Z" fill="currentColor"/>
                                 </svg>
-                            </a>
+                            </button>
                         </div>
                 </div>
             </div>
 
             <!-- Message section -->
-            <section class="w-full mt-5 border-t">
+            <section v-if="myMessages.length>0" class="w-full mt-5 border-t">
                 
                 <!-- One message -->
                 <div v-for="message in myMessages" :key="message"  class="w-full border-b px-6 xl:px-10 py-4 pb-6">
@@ -144,12 +144,68 @@
                     </p>
                 </div>
             </section>
+
+             <section v-else class="w-full mt-5 border-t">
+                
+                <img src="@/assets/img/man-listening-music-2194229-0.png" alt="" class="mx-auto">
+                <div class="flex justify-center mt-10">
+                    <!-- Mail logo -->
+                    <a href="./index.html" class="flex items-center text-black text-5xl font-bold ">
+                        <img src="@/assets/img/near_logo_stack.png" alt="" class="">
+                        <span class="h-14 w-0.5 bg-black rounded-full ml-1 mr-3"></span>
+                        Mail
+                        <img src="@/assets/img/plane-blue.png" alt="" class=" ml-2 -mt-8">
+                    </a>
+                </div>
+                <p class="text-center mt-4">© 2021 NEAR Ltd</p>
+            </section>
         </div>
     </div>
 
       <loading v-model:active="isLoading"
                  :can-cancel="false"
                  :is-full-page="true"/>
+
+    <TransitionRoot as="template" :show="modalOpen">
+        <Dialog as="div" class="fixed z-10 inset-0 overflow-y-auto" @close="modalOpen = false">
+            <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                <TransitionChild as="template" enter="ease-out duration-300" enter-from="opacity-0" enter-to="opacity-100" leave="ease-in duration-200" leave-from="opacity-100" leave-to="opacity-0">
+                    <DialogOverlay class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+                        </TransitionChild>
+
+        <!-- This element is to trick the browser into centering the modal contents. -->
+        <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+        <TransitionChild as="template" enter="ease-out duration-300" enter-from="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" enter-to="opacity-100 translate-y-0 sm:scale-100" leave="ease-in duration-200" leave-from="opacity-100 translate-y-0 sm:scale-100" leave-to="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95">
+          <div class="fixed top-0  w-full h-screen bg-50 z-50">
+        <div class="flex h-full items-center justify-center">
+            <div class="w-11/12 md:w-2/3 xl:w-1/3 bg-white rounded-t-2xl">
+
+                <div class="flex justify-between bg-gray-900 items-center px-6 rounded-t-xl text-white py-3">
+                    <p class="">New message</p>
+                    <button @click="modalOpen=false" class="hover:text-blue-300 transform active:scale-95 duration-100">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 10 10" fill="none">
+                            <path d="M1.66667 0L0 1.66667L3.33333 5L0 8.33333L1.66667 10L5 6.66667L8.33333 10L10 8.33333L6.66667 5L10 1.66667L8.33333 0L5 3.33333L1.66667 0Z" fill="currentColor" fill-opacity="0.6"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <form action="" class="mt-2 px-6">
+                    <input type="text" placeholder="Recipients" class="w-full outline-none border-b pl-6 py-2 font-medium">
+                    <input type="text" placeholder="Fee" class="w-full outline-none border-b pl-6 py-2 font-medium">
+                    <textarea name="" id="" cols="30" rows="10" class="w-full pl-6 py-2 outline-none " placeholder="Message body "></textarea>
+
+                    <a href="./mail-sended.html" class="inline-block text-white rounded-full my-9 bg-gray-900 font-bold text-sm py-3 px-10 transform active:scale-95 duration-100">SEND</a>
+                </form>
+
+                <img src="@/assets/img/pixel.png" alt="" class="w-full">
+
+            </div>
+        </div>
+    </div>
+        </TransitionChild>
+      </div>
+    </Dialog>
+  </TransitionRoot>
 </template>
 
 <script>
@@ -160,18 +216,27 @@ import router from '@/router/index.js'
 import { useMessageBox } from "@/composables/near"
 import { wallet} from "@/services/near";
 import { format, fromUnixTime } from "date-fns";
+import { ref } from 'vue'
+import { Dialog, DialogOverlay, TransitionChild, TransitionRoot } from '@headlessui/vue'
 
 export default {
     components: {
-        Loading
+        Loading,
+        Dialog,
+        DialogOverlay,
+        TransitionChild,
+        TransitionRoot
     },
     setup() {
+         const modalOpen = ref(false)
          const accountId  = store.state.accountId;
-         const {isLoading, myMessages} = useMessageBox();
+         const {isLoading, myMessages, deleteAllMessages} = useMessageBox();
 
          return {
+             modalOpen,
              isLoading,
              myMessages,
+             deleteAllMessages,
              accountId,
              signOut: () => {
                 wallet.signOut();

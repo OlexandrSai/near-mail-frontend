@@ -2,13 +2,13 @@ import { ref,onMounted } from "vue";
 import {wallet} from '@/services/near'
 import {
     getMessages,
+    deleteAllMessages
   } from "@/services/near";
 
 const accountId = wallet.getAccountId();
 
 export const useMessageBox= () => {
     const myMessages  = ref([])
-    // const myDesign = ref(false)
     const isLoading = ref(false)
     const  err = ref(null)
 
@@ -26,12 +26,12 @@ export const useMessageBox= () => {
         }
     })
 
-    // const handleGenerateDesign = async (accountId) => {
-    //     isLoading.value=true
-    //     await generateDesign(accountId)
-    //     generatedDesign.value = await getTempDesign(accountId)
-    //     isLoading.value=false
-    // }
+    const handledeleteAllMessages = async () => {
+        isLoading.value=true
+        await deleteAllMessages()
+        myMessages.value = await getMessages(accountId)
+        isLoading.value=false
+    }
 
     // const handleClaimDesign = async (seed) => {
     //     isLoading.value=true
@@ -50,6 +50,7 @@ export const useMessageBox= () => {
     return {
         isLoading,
         myMessages,
+        deleteAllMessages:handledeleteAllMessages
         // generatedDesign,
         // myDesign,
         // generateDesign:  handleGenerateDesign,
