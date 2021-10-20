@@ -2,7 +2,8 @@ import { ref,onMounted } from "vue";
 import {wallet} from '@/services/near'
 import {
     getMessages,
-    deleteAllMessages
+    deleteAllMessages,
+    sendMessage
   } from "@/services/near";
 
 const accountId = wallet.getAccountId();
@@ -15,16 +16,21 @@ export const useMessageBox= () => {
     onMounted(async () => {
         try {
             isLoading.value=true
-            // generatedDesign.value = await getTempDesign(accountId)
-            // myDesign.value = await getViewMyDesign(accountId)
             myMessages.value = await getMessages(accountId)
-            console.log(myMessages.value)
             isLoading.value=false
         } catch (e) {
             err.value = e
             console.log('error')
         }
     })
+
+    
+    const handleSendMessage = async ({target_account_id, message}) => {
+        isLoading.value=true
+        await sendMessage({target_account_id, message})
+        myMessages.value = await getMessages(accountId)
+        isLoading.value=false
+    }
 
     const handledeleteAllMessages = async () => {
         isLoading.value=true
@@ -33,28 +39,10 @@ export const useMessageBox= () => {
         isLoading.value=false
     }
 
-    // const handleClaimDesign = async (seed) => {
-    //     isLoading.value=true
-    //     await claimDesign(seed).then(res=>console.log(res), res=>console.log(res))
-    //     myDesign.value = await getViewMyDesign(accountId)
-    //     isLoading.value=false
-    // }
-
-    // const handleBurnDesign = async () => {
-    //     isLoading.value=true
-    //     await burnDesign()
-    //     myDesign.value = false
-    //     isLoading.value=false
-    // }
-
     return {
         isLoading,
         myMessages,
-        deleteAllMessages:handledeleteAllMessages
-        // generatedDesign,
-        // myDesign,
-        // generateDesign:  handleGenerateDesign,
-        // claimDesign: handleClaimDesign,
-        // burnDesign: handleBurnDesign
+        sendMessage:handleSendMessage,
+        deleteAllMessages:handledeleteAllMessages,
     }
 }

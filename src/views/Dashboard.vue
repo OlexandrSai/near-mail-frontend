@@ -11,11 +11,11 @@
                 <!-- Buttons -->
                 <div class="flex items-center space-x-4">
                     <!-- Logout -->
-                    <a href="#" class="text-white">
+                    <button @click="signOut" class="text-white">
                         <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" viewBox="0 0 45 45" fill="none">
                             <path d="M35.625 39.375H18.75C16.6789 39.375 15 37.6961 15 35.625V28.125H18.75V35.625H35.625V9.375H18.75V16.875H15V9.375C15 7.30393 16.6789 5.625 18.75 5.625H35.625C37.6961 5.625 39.375 7.30393 39.375 9.375V35.625C39.375 37.6961 37.6961 39.375 35.625 39.375ZM22.5 30V24.375H5.625V20.625H22.5V15L31.875 22.5L22.5 30Z" fill="currentColor"/>
                         </svg>
-                    </a>
+                    </button>
 
                     <!-- Menu -->
                     <a href="" class="text-white">
@@ -72,12 +72,12 @@
                 </div>
                 <div class="flex flex-col items-center">
                     <!-- Logout -->
-                    <a href="#" class="flex items-center text-white hover:text-red-600 -ml-3 transform active:scale-95 duration-100">
+                    <button @click="signOut" class="flex items-center text-white hover:text-red-600 -ml-3 transform active:scale-95 duration-100">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-10 xl:w-7  mr-2" viewBox="0 0 45 45" fill="none">
                             <path d="M35.625 39.375H18.75C16.6789 39.375 15 37.6961 15 35.625V28.125H18.75V35.625H35.625V9.375H18.75V16.875H15V9.375C15 7.30393 16.6789 5.625 18.75 5.625H35.625C37.6961 5.625 39.375 7.30393 39.375 9.375V35.625C39.375 37.6961 37.6961 39.375 35.625 39.375ZM22.5 30V24.375H5.625V20.625H22.5V15L31.875 22.5L22.5 30Z" fill="currentColor"/>
                         </svg>
                         <span class="hidden xl:block">Logout</span>
-                    </a>
+                    </button>
                     <img src="@/assets/img/lady-employee-working-in-office.png" alt="" class="w-full hidden xl:block">
                 </div>
             </div>
@@ -190,11 +190,10 @@
                 </div>
 
                 <form action="" class="mt-2 px-6">
-                    <input type="text" placeholder="Recipients" class="w-full outline-none border-b pl-6 py-2 font-medium">
-                    <input type="text" placeholder="Fee" class="w-full outline-none border-b pl-6 py-2 font-medium">
-                    <textarea name="" id="" cols="30" rows="10" class="w-full pl-6 py-2 outline-none " placeholder="Message body "></textarea>
+                    <input type="text" placeholder="Recipient" v-model="recipient" class="w-full outline-none border-b pl-6 py-2 font-medium">
+                    <textarea v-model="messageBody" cols="30" rows="10" class="w-full pl-6 py-2 outline-none " placeholder="Message body "></textarea>
 
-                    <a href="./mail-sended.html" class="inline-block text-white rounded-full my-9 bg-gray-900 font-bold text-sm py-3 px-10 transform active:scale-95 duration-100">SEND</a>
+                    <button @click="handleSubmit" class="inline-block text-white rounded-full my-9 bg-gray-900 font-bold text-sm py-3 px-10 transform active:scale-95 duration-100">SEND</button>
                 </form>
 
                 <img src="@/assets/img/pixel.png" alt="" class="w-full">
@@ -229,14 +228,27 @@ export default {
     },
     setup() {
          const modalOpen = ref(false)
+         const recipient = ref("")
+         const messageBody = ref("")
          const accountId  = store.state.accountId;
-         const {isLoading, myMessages, deleteAllMessages} = useMessageBox();
+         const {isLoading, myMessages, deleteAllMessages, sendMessage} = useMessageBox();
+
+         const handleSubmit = () => {
+        sendMessage({
+          target_account_id:recipient.value,
+          message: messageBody.value
+        })
+         }
 
          return {
              modalOpen,
+             recipient,
+             messageBody,
              isLoading,
              myMessages,
              deleteAllMessages,
+             sendMessage,
+             handleSubmit,
              accountId,
              signOut: () => {
                 wallet.signOut();

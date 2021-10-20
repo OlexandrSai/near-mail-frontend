@@ -1,4 +1,4 @@
-import { keyStores, Near, WalletConnection } from "near-api-js"; //utils
+import { keyStores, Near, WalletConnection, utils } from "near-api-js"; //utils
 import BN from "bn.js";
 
 export const CONTRACT_ID = "dev-1634694940112-40194560672775";
@@ -14,14 +14,6 @@ export const near = new Near({
 
   export const wallet = new WalletConnection(near, "messagebox");
 
-//   export const getTempDesign = (accountId) => {
-//     return  wallet.account().viewFunction(CONTRACT_ID,"getTempDesign", {accountId:accountId})
-//   }
-
-//   export const getViewMyDesign = (accountId) => {
-//     return  wallet.account().viewFunction(CONTRACT_ID,"viewMyDesign", {accountId:accountId})
-//   }
-
   //function to get all  income messages
   export const getMessages = (accountId) => {
     return wallet.account().viewFunction(CONTRACT_ID,"retrieveMessages", {accountId:accountId})
@@ -32,15 +24,20 @@ export const near = new Near({
     return wallet.account().functionCall({
       contractId: CONTRACT_ID,
       methodName: "deleteAllMessages",
-      gas
+      gas,
   })
   };
 
-//   //function to burn design
-//   export const burnDesign = () => {
-//     return wallet.account().functionCall({
-//       contractId: CONTRACT_ID,
-//       methodName: "burnMyDesign",
-//       gas
-//   })
-//   };
+  //function to send message
+  export const sendMessage = ({target_account_id, message}) => {
+    console.log()
+    const attachedDeposit = utils.format.parseNearAmount("0.001")
+    console.log(attachedDeposit)
+    return wallet.account().functionCall({
+      contractId: CONTRACT_ID,
+      methodName: "sendMessage",
+      gas,
+      args: {target_account_id, message},
+      attachedDeposit
+  })
+  };
