@@ -508,7 +508,7 @@ export default {
   components: { Header },
   setup() {
       return {
-      signIn: () => wallet.requestSignIn(CONTRACT_ID)
+      signIn: () => { wallet.requestSignIn(CONTRACT_ID) }
     }
   }
 }

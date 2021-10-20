@@ -62,7 +62,7 @@
                         <a href="#" class="flex justify-center items-center w-14 xl:w-24 h-14 xl:h-24 bg-white rounded-full">
                             <img src="@/assets/img/near_logo_stack2.png" alt="" class="w-10">
                         </a>
-                        <p class="hidden xl:block mt-5 text-white text-2xl font-bold">oliinykk.near</p>
+                        <p class="hidden xl:block mt-5 text-white text-2xl font-bold">{{accountId}}</p>
                     </div>
 
                     <!-- Menu -->
@@ -440,16 +440,38 @@
 
             </section>
         </div>
-
     </div>
+
+      <loading v-model:active="isLoading"
+                 :can-cancel="false"
+                 :is-full-page="true"/>
 </template>
 
 <script>
-export default {
+import Loading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/vue-loading.css';
+import store from '../store/store.js'
+import router from '@/router/index.js'
+import { useMessageBox } from "@/composables/near"
+import { wallet} from "@/services/near";
 
+export default {
+    components: {
+        Loading
+    },
+    setup() {
+         const accountId  = store.state.accountId;
+         const {isLoading} = useMessageBox();
+
+         return {
+             isLoading,
+             accountId,
+             signOut: () => {
+                wallet.signOut();
+                localStorage.removeItem(`near-api-js:keystore:${accountId}:testnet`);
+                router.push('/')
+            },
+         }
+    }
 }
 </script>
-
-<style>
-
-</style>
