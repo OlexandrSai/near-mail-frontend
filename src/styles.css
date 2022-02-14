@@ -1,0 +1,41 @@
+/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    font-family: 'Inter', sans-serif;
+  }
+  .profile-info {
+    width: 114px;
+  }
+  .messaging-btn {
+    width: 100%;
+  }
+  .bg-50 {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+  .alert-bg {
+    width: 312px;
+  }
+  @screen md {
+    .messaging-btn {
+      width: 272px;
+    }
+    .alert-bg {
+      width: 498px;
+    }
+  }
+  @screen lg {
+
+  }
+  @screen xl {
+    .profile-info {
+      width: 334px;
+    }
+  }
+  @screen 2xl {
+
+  }
+}
