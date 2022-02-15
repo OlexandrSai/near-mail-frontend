@@ -1,11 +1,12 @@
 import {Injectable} from '@angular/core';
 import {NearService} from "./near.service";
+import {format, fromUnixTime} from "date-fns";
 
 @Injectable({
   providedIn: 'root'
 })
 export class MailService {
-  public myMessages = [];
+  public myMessages: any[] = [];
   public isLoading = false;
   public err: any = null;
 
@@ -17,6 +18,7 @@ export class MailService {
       this.isLoading = true
       this.myMessages = await this.nearService.getMessages(this.nearService.accountId)
       this.isLoading = false
+      console.log(this.myMessages);
     } catch (e) {
       this.err = e
       console.log('error')
@@ -36,5 +38,9 @@ export class MailService {
     await this.nearService.deleteAllMessages()
     this.myMessages = await this.nearService.getMessages(this.nearService.accountId)
     this.isLoading = false
+  }
+
+  formatDate(data: any) {
+    return format(new Date(fromUnixTime(parseInt(data.timestamp.substring(0, 10)))), "MMMM do yyyy")
   }
 }

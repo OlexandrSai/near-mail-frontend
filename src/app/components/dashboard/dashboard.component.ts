@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {MailService} from "../../services/mail.service";
 
 @Component({
   selector: 'app-dashboard',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
   public modalOpen = false;
-  constructor() { }
+  constructor(public mailService: MailService) { }
 
   ngOnInit(): void {
+    this.loadData();
   }
 
+  async loadData() {
+    await this.mailService.loadMessages();
+  }
 }

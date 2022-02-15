@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {environment} from "../../environments/environment";
 import {keyStores, Near, utils, WalletConnection} from "near-api-js";
+import {Router} from "@angular/router";
 
 // @ts-ignore
 import BN from "bn.js";
@@ -21,7 +22,8 @@ export class NearService {
     headers: {}
   });
   public wallet = new WalletConnection(this.near, "meme-museum");
-  constructor() {
+
+  constructor(private router: Router) {
     this.accountId = this.wallet.getAccountId();
   }
 
@@ -35,6 +37,7 @@ export class NearService {
   handleSignOut() {
     this.wallet.signOut()
     this.accountId = ''
+    this.router.navigate(['']);
   };
 
   //function to get all  income messages
@@ -54,11 +57,9 @@ export class NearService {
 
   //function to send message
   sendMessage({target_account_id, message}: {target_account_id: any, message: any}) {
-    console.log()
-
     const attachedDeposit: any = utils.format.parseNearAmount("0.001")
     const attachedDepositBN = new BN(attachedDeposit);
-    console.log(attachedDeposit)
+
     return this.wallet.account().functionCall({
       contractId: this.CONTRACT_ID,
       methodName: "sendMessage",
