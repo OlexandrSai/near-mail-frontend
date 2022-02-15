@@ -8,6 +8,8 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HomeComponent } from './components/home/home.component';
 import { MessageFormComponent } from './components/message-form/message-form.component';
 import {RouterModule} from "@angular/router";
+import {FormsModule} from "@angular/forms";
+import { LoaderComponent } from './components/loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -15,12 +17,14 @@ import {RouterModule} from "@angular/router";
     HeaderComponent,
     DashboardComponent,
     HomeComponent,
-    MessageFormComponent
+    MessageFormComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    RouterModule
+    RouterModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

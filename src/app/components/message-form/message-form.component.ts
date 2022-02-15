@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {MailService} from "../../services/mail.service";
 
 @Component({
   selector: 'app-message-form',
@@ -8,8 +9,12 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 export class MessageFormComponent implements OnInit {
   @Input() public modalOpen: boolean = false;
   @Output() public modalOpenChange = new EventEmitter<boolean>();
+  public data = {
+    target_account_id: '',
+    message: ''
+  }
 
-  constructor() { }
+  constructor(private mailService: MailService) { }
 
   ngOnInit(): void {
   }
@@ -19,4 +24,7 @@ export class MessageFormComponent implements OnInit {
     this.modalOpenChange.emit(this.modalOpen);
   }
 
+  async handleSubmit() {
+    await this.mailService.handleSendMessage(this.data);
+  }
 }

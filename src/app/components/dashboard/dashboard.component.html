@@ -1,3 +1,5 @@
+<app-loader *ngIf="mailService.isLoading"></app-loader>
+
 <!-- Mobile navigation -->
 <nav class="md:hidden bg-gray-900 text-2xl shadow-xl">
   <div class="container mx-auto px-6">
@@ -151,7 +153,7 @@
 
     <!-- Message section -->
     <!--            <section v-if="myMessages.length>0" class="w-full mt-5 border-t">-->
-    <section *ngIf="mailService.myMessages; else elseBlock" class="w-full mt-5 border-t">
+    <section *ngIf="mailService.myMessages.length>0; else elseBlock" class="w-full mt-5 border-t">
 
       <!-- One message -->
       <div *ngFor="let message of mailService.myMessages" class="w-full border-b px-6 xl:px-10 py-4 pb-6">
@@ -188,8 +190,5 @@
   </div>
 </div>
 <app-message-form *ngIf="modalOpen" [(modalOpen)]="modalOpen"></app-message-form>
-<!--<loading v-model:active="isLoading"-->
-<!--         :can-cancel="false"-->
-<!--         :is-full-page="true"/>-->
 
 
