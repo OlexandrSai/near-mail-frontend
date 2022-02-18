@@ -112,7 +112,7 @@
       <!-- Search from - Messaginig btn -->
       <div class="flex flex-col md:flex-row items-center w-full mt-6 lg:mt-10">
         <!-- Search -->
-        <!-- <input type="text" placeholder="Search or type mail" class="relative search md:mr-24 py-3 outline-none border focus:border-blue-400 w-full rounded-full pl-8"> -->
+         <input type="text" [(ngModel)]="search" (change)="searchChange()" placeholder="Search or type mail" class="relative search md:mr-24 py-3 outline-none border focus:border-blue-400 w-full rounded-full pl-8">
 
         <!-- Start messaginig -->
         <button (click)="modalOpen = !modalOpen"
@@ -152,20 +152,20 @@
     </div>
 
     <!-- Message section -->
-    <!--            <section v-if="myMessages.length>0" class="w-full mt-5 border-t">-->
     <section *ngIf="mailService.myMessages.length>0; else elseBlock" class="w-full mt-5 border-t">
 
       <!-- One message -->
-      <div *ngFor="let message of mailService.myMessages" class="w-full border-b px-6 xl:px-10 py-4 pb-6">
+      <div *ngFor="let message of messages" class="w-full border-b px-6 xl:px-10 py-4 pb-6">
 
         <div class=" flex items-center text-sm">
           <div class="w-1/5 text-center hidden md:inline-block">{{mailService.formatDate(message)}}</div>
-          <div class="inline-block w-full md:w-1/5 text-center">{{message.sender}}</div>
+          <div class="inline-block w-full md:w-1/5 text-center"><span [innerHTML]="message.sender"></span></div>
           <div class="inline-block w-full md:w-1/5 text-center">{{mailService.nearService.accountId}}</div>
         </div>
 
         <p class="text-sm w-full md:w-4/5 mt-5">
-          {{message.message}}
+          <span class="text-gray-400 text-lg">body: </span>
+          <span [innerHTML]="message.message"></span>
         </p>
       </div>
     </section>
