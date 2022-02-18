@@ -16,9 +16,9 @@ export class MailService {
   async loadMessages() {
     try {
       this.isLoading = true
+      this.err = null;
       this.myMessages = await this.nearService.getMessages(this.nearService.accountId)
       this.isLoading = false
-      console.log(this.myMessages);
     } catch (e) {
       this.err = e
       console.log('error')
@@ -42,5 +42,10 @@ export class MailService {
 
   formatDate(data: any) {
     return format(new Date(fromUnixTime(parseInt(data.timestamp.substring(0, 10)))), "MMMM do yyyy")
+  }
+
+  async restoreDefaultContract() {
+    this.nearService.restoreDefaultContract();
+    await this.loadMessages();
   }
 }

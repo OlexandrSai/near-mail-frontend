@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import {MailService} from "../../services/mail.service";
 
 @Component({
@@ -6,12 +6,9 @@ import {MailService} from "../../services/mail.service";
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
 
   constructor(public mailService: MailService) { }
-
-  ngOnInit(): void {
-  }
 
   async signIn() {
     await this.mailService.nearService.handleSignIn();

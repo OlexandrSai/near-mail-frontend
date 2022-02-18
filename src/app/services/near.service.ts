@@ -68,4 +68,12 @@ export class NearService {
       attachedDeposit: attachedDepositBN
     })
   };
+
+  setContract(contract: any) {
+    this.CONTRACT_ID = contract;
+  }
+
+  restoreDefaultContract() {
+    this.CONTRACT_ID = environment.NG_APP_CONTRACT_ID
+  }
 }

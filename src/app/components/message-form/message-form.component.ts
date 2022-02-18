@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {MailService} from "../../services/mail.service";
 
 @Component({
@@ -6,7 +6,7 @@ import {MailService} from "../../services/mail.service";
   templateUrl: './message-form.component.html',
   styleUrls: ['./message-form.component.css']
 })
-export class MessageFormComponent implements OnInit {
+export class MessageFormComponent {
   @Input() public modalOpen: boolean = false;
   @Output() public modalOpenChange = new EventEmitter<boolean>();
   public data = {
@@ -15,9 +15,6 @@ export class MessageFormComponent implements OnInit {
   }
 
   constructor(private mailService: MailService) { }
-
-  ngOnInit(): void {
-  }
 
   closeModal() {
     this.modalOpen = false;

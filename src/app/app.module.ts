@@ -10,6 +10,7 @@ import { MessageFormComponent } from './components/message-form/message-form.com
 import {RouterModule} from "@angular/router";
 import {FormsModule} from "@angular/forms";
 import { LoaderComponent } from './components/loader/loader.component';
+import { ChangeContractComponent } from './components/change-contract/change-contract.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { LoaderComponent } from './components/loader/loader.component';
     DashboardComponent,
     HomeComponent,
     MessageFormComponent,
-    LoaderComponent
+    LoaderComponent,
+    ChangeContractComponent
   ],
   imports: [
     BrowserModule,
