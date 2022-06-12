@@ -11,6 +11,8 @@ import {RouterModule} from "@angular/router";
 import {FormsModule} from "@angular/forms";
 import { LoaderComponent } from './components/loader/loader.component';
 import { ChangeContractComponent } from './components/change-contract/change-contract.component';
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { ToastrModule } from "ngx-toastr";
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { ChangeContractComponent } from './components/change-contract/change-con
     BrowserModule,
     AppRoutingModule,
     RouterModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

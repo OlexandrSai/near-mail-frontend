@@ -13,7 +13,6 @@ export class NearService {
   public wallet: WalletConnection;
   public messageContract: any;
 
-
   constructor(private router: Router) {
     // connecting to NEAR
     this.near = new Near({

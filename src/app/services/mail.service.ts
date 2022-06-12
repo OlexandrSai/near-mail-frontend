@@ -14,15 +14,16 @@ export class MailService {
   }
 
   async loadMessages() {
+    this.isLoading = true;
     try {
-      this.isLoading = true;
       this.err = null;
       this.myMessages = await this.nearService.getMessages(this.nearService.accountId);
-      this.isLoading = false;
     } catch (e) {
       this.err = e;
       console.log(e);
       console.log('error');
+    } finally {
+      this.isLoading = false;
     }
   }
 
