@@ -16,7 +16,8 @@ export class Message {
 /**************************/
 
 const messages = new PersistentMap<string, Message[]>('m')
-const contractOwner = "asai1.testnet";
+// PUT YOUR ACCOUNT
+const contractOwner = "kbastard2.testnet";
 const messageLimit = 20;
 export const startFee = 0.001;
 

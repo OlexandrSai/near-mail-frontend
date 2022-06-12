@@ -152,7 +152,7 @@
     </div>
 
     <!-- Message section -->
-    <section *ngIf="mailService.myMessages.length>0; else elseBlock" class="w-full mt-5 border-t">
+    <section *ngIf="mailService.myMessages && mailService.myMessages.length > 0; else elseBlock" class="w-full mt-5 border-t">
 
       <!-- One message -->
       <div *ngFor="let message of messages" class="w-full border-b px-6 xl:px-10 py-4 pb-6">

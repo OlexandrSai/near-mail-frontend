@@ -9,7 +9,9 @@
     "test": "asp --nologo"
   },
   "dependencies": {
-    "near-sdk-as": "3.0.0"
+    "@angular/animations": "^14.0.1",
+    "near-sdk-as": "3.0.0",
+    "ngx-toastr": "^14.3.0"
   },
   "devDependencies": {
     "shelljs": "^0.8.4"

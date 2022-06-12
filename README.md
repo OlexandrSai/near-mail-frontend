@@ -1,27 +1,146 @@
-# NEARMailFrontend
+#  🎓 NCD.L2.sample--mail dApp
+This repository contains a complete frontend applications (Vue.js, React) to work with
+<a href="https://github.com/Learn-NEAR/NCD--messagebox" target="_blank">NCD.L1.messagebox smart contract</a> targeting the NEAR platform:
+1. Vue.Js (main branch)
+2. React (react branch)
+2. Angular (angular branch)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.1.3.
+The goal of this repository is to make it as easy as possible to get started writing frontend with Vue.js, React and Angular for AssemblyScript contracts built to work with NEAR Protocol.
 
-## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## ⚠️ Warning
+Any content produced by NEAR, or developer resources that NEAR provides, are for educational and inspiration purposes only. NEAR does not encourage, induce or sanction the deployment of any such applications in violation of applicable laws or regulations.
 
-## Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## ⚡  Usage
+![image](https://user-images.githubusercontent.com/15414351/173239812-6ce90ecf-b509-46fe-bd9c-6c296a623817.png)
+<a href="" target="_blank">UI walkthrough</a>
 
-## Build
+You can use this app with contract ids which were deployed by the creators of this repo or you can use it with your own deployed contract ids.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Before pasting id make sure that you deployed correct smart contract, in other case this code may not work as expected.
 
-## Running unit tests
+## Project setup
+To deploy sample--promises to your account visit <a href="https://github.com/Learn-NEAR/NCD--messagebox" target="_blank">this repo (smart contract deployment instructions are inside):</a>
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Also, you can find contract example in that repo, check ```contacts/NCD--messagebox```
 
-## Running end-to-end tests
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+```
+CONTRACT_ID = "put your contract id here"
+...
+```
 
-## Further help
+After you fill up environment.ts file, you need to:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+1. Install Angular CLI (if previously you didn't)
+```
+npm i -g @angular/cli
+```
+
+2. Install all dependencies
+```
+npm i
+```
+3. Run the project locally
+```
+npm run serve
+```
+
+Other commands:
+
+Compiles and minifies for production
+```
+npm run build
+```
+Lints and fixes files
+```
+npm run lint
+```
+
+## 👀 Code walkthrough for Near university students
+
+<a href="" >Code walk-through video | TBA |</a>
+
+### -- Contract's --
+
+To work with message contract we have separate functions inside ``` src/app/services/near.service.ts```.
+```
+  getMessageContract() {
+    return new Contract(
+      this.wallet.account(),
+      environment.CONTRACT_ID,
+      {
+        viewMethods: ['retrieveMessages'],
+        changeMethods: ['deleteAllMessages', 'sendMessage', 'summarize', 'transfer']
+      }
+    )
+  }
+```
+
+### -- Near Service --
+
+We are using ```near-api-js``` to work with NEAR blockchain. In ``` src/app/services/near.service.ts ``` we are importing classes, functions and configs which we are going to use:
+```
+import { keyStores, Near, Contract, utils, WalletConnection } from "near-api-js";
+```
+
+Class contains two variables
+```
+public near: Near;
+public wallet: WalletConnection;
+```
+
+Then in ``` constructor() ``` we are connecting to NEAR:
+```
+this.near = new Near({
+  networkId: environment.NETWORK_ID,
+  keyStore: new keyStores.BrowserLocalStorageKeyStore(),
+  nodeUrl: environment.NODE_URL,
+  walletUrl: environment.WALLET_URL,
+  headers: {}
+});
+``` 
+and creating wallet connection
+```
+// create wallet connection
+this.wallet = new WalletConnection(this.near, "messagebox");
+```
+
+
+### -- Mail Service --
+
+``` src/app/services/mail.service.ts ``` represent the main functional class of dApp
+
+We use that container to encapsulate all data and function's related to our idea's:
+```
+  public myMessages: any[] = [];
+  public isLoading = false;
+  ...
+  
+  async loadMessages() {...};
+  async handleSendMessage({target_account_id, message}: { target_account_id: any, message: any }) {...}
+```
+
+With dependency injection we are able to share everything with components. ``` src/app/components/dashboard/dashboard.component.ts ``` as an example :
+```
+  constructor(public mailService: MailService) {
+  }
+
+  async loadData() {
+    await this.mailService.loadMessages();
+    this.messages = this.mailService.myMessages;
+  }
+```
+
+## Examples
+``` src/app/services/near.service.ts ```
+### - Function | No Parameters -
+```
+async deleteAllMessages() {...}
+```
+
+### - Function | With Parameters -
+```
+setContract(contract: any) {...}
+```
