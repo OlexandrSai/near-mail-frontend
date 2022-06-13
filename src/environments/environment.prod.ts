@@ -1,8 +1,8 @@
 export const environment = {
   production: true,
-  NG_APP_CONTRACT_ID: "dev-1634694940112-40194560672775",
-  NG_APP_gas: "100000000000000",
-  NG_APP_networkId: "testnet",
-  NG_APP_nodeUrl: "https://rpc.testnet.near.org",
-  NG_APP_walletUrl: "https://wallet.testnet.near.org"
+  CONTRACT_ID: "dev-1655043830102-32148593733969",
+  GAS: "100000000000000",
+  NETWORK_ID: "testnet",
+  NODE_URL: "https://rpc.testnet.near.org",
+  WALLET_URL: "https://wallet.testnet.near.org"
 };

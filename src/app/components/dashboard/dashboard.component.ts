@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {MailService} from "../../services/mail.service";
+import { Component, OnInit } from '@angular/core';
+import { MailService } from "../../services/mail.service";
 
 @Component({
   selector: 'app-dashboard',
@@ -43,7 +43,7 @@ export class DashboardComponent implements OnInit {
             }
           );
         });
-        return {...message, ...highlightText};
+        return { ...message, ...highlightText };
       });
 
       if (this.search) {

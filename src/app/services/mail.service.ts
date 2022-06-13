@@ -1,6 +1,6 @@
-import {Injectable} from '@angular/core';
-import {NearService} from "./near.service";
-import {format, fromUnixTime} from "date-fns";
+import { Injectable } from '@angular/core';
+import { NearService } from "./near.service";
+import { format, fromUnixTime } from "date-fns";
 
 @Injectable({
   providedIn: 'root'
@@ -14,34 +14,41 @@ export class MailService {
   }
 
   async loadMessages() {
+    this.isLoading = true;
     try {
-      this.isLoading = true
       this.err = null;
-      this.myMessages = await this.nearService.getMessages(this.nearService.accountId)
-      this.isLoading = false
+      this.myMessages = await this.nearService.getMessages(this.nearService.accountId);
     } catch (e) {
-      this.err = e
-      console.log('error')
+      this.err = e;
+      console.log(e);
+      console.log('error');
+    } finally {
+      this.isLoading = false;
     }
   }
 
-
-  async handleSendMessage({target_account_id, message}: { target_account_id: any, message: any }) {
+  // Not possible to send a message to yourself
+  async handleSendMessage({ target_account_id, message }: { target_account_id: any, message: any }) {
     this.isLoading = true;
-    await this.nearService.sendMessage({target_account_id, message});
-    this.myMessages = await this.nearService.getMessages(this.nearService.accountId)
-    this.isLoading = false
+    try {
+      await this.nearService.sendMessage({ target_account_id, message });
+      this.myMessages = await this.nearService.getMessages(this.nearService.accountId);
+    } catch (e) {
+      console.log(e);
+    } finally {
+      this.isLoading = false;
+    }
   }
 
   async handleDeleteAllMessages() {
     this.isLoading = true;
-    await this.nearService.deleteAllMessages()
-    this.myMessages = await this.nearService.getMessages(this.nearService.accountId)
-    this.isLoading = false
+    await this.nearService.deleteAllMessages();
+    this.myMessages = await this.nearService.getMessages(this.nearService.accountId);
+    this.isLoading = false;
   }
 
   formatDate(data: any) {
-    return format(new Date(fromUnixTime(parseInt(data.timestamp.substring(0, 10)))), "MMMM do yyyy")
+    return format(new Date(fromUnixTime(parseInt(data.timestamp.substring(0, 10)))), "MMMM do yyyy");
   }
 
   async restoreDefaultContract() {

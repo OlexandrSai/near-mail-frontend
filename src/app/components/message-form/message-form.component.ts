@@ -1,5 +1,6 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {MailService} from "../../services/mail.service";
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { MailService } from "../../services/mail.service";
+import { ToastrService } from "ngx-toastr";
 
 @Component({
   selector: 'app-message-form',
@@ -14,7 +15,8 @@ export class MessageFormComponent {
     message: ''
   }
 
-  constructor(private mailService: MailService) { }
+  constructor(private mailService: MailService, private toast: ToastrService) {
+  }
 
   closeModal() {
     this.modalOpen = false;
@@ -22,6 +24,18 @@ export class MessageFormComponent {
   }
 
   async handleSubmit() {
+    // Not possible to send a message to yourself
+    if (this.data.target_account_id === '') {
+      this.toast.error('Invalid receiver Id');
+      return
+    }
+
+    // Not possible to send a message to yourself
+    if (this.data.target_account_id === this.mailService.nearService.accountId) {
+      this.toast.error('Not possible to send a message to yourself');
+      return
+    }
+
     await this.mailService.handleSendMessage(this.data);
   }
 }
