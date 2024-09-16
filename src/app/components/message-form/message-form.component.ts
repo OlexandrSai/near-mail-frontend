@@ -30,6 +30,11 @@ export class MessageFormComponent {
       return
     }
 
+    if (!this.data.target_account_id.match(/^[a-zA-Z^\w]*.testnet/)) {
+      this.toast.error('Invalid receiver Id');
+      return
+    }
+
     // Not possible to send a message to yourself
     if (this.data.target_account_id === this.mailService.nearService.accountId) {
       this.toast.error('Not possible to send a message to yourself');
